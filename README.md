@@ -1,8 +1,8 @@
 # tab-slider
-
+[![npm](https://img.shields.io/npm/v/tab-slider.svg)](https://www.npmjs.com/package/tab-slider)
 > A Vue component that can switch tabs by swiping the screen to the left or right
 
-[![npm](https://img.shields.io/npm/v/tab-slider.svg)](https://www.npmjs.com/package/tab-slider)
+
 ## Install
 ``` bash
 npm install tab-slider -S
@@ -30,6 +30,7 @@ comp(required)|A array contains all router components|Array|[{name: 'comp1', com
 defalut-index(optional)|index of default component to dispaly, default to 0|Number| 1
 
 中文版本：
+
 属性 | 描述 | 类型 | 例子
 ----|---|---|---
 comp(必需)|包含所有路由组件的数组|Array|[{name: 'comp1', component: foo}, {name: 'comp2', component: bar}]
