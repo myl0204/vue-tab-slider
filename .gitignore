@@ -11,3 +11,10 @@ yarn-error.log*
 *.ntvs*
 *.njsproj
 *.sln
+
+
+src/components/test*
+src/main.js
+src/App.vue
+src/components/HelloWorld.vue
+src/router.js

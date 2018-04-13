@@ -12,7 +12,8 @@
   },
   "dependencies": {
     "compression-webpack-plugin": "^1.1.11",
-    "vue": "^2.5.2"
+    "vue": "^2.5.2",
+    "vue-router": "^3.0.1"
   },
   "devDependencies": {
     "node-sass": "^4.8.3",
