@@ -1,5 +1,14 @@
 <template>
   <div class="tab-slider">
+    <div class="tab-slider__tab">
+      <router-link
+        class="tab-slider__tab--item"
+        v-for="item in comp" :key="item.name"
+        :to="{name: item.name, path: item.path}"
+        active-class="active">
+        {{item.label}}
+      </router-link>
+    </div>
     <div
       ref="leftPage"
       class="tab-slider__out-of-screen tab-slider__out-of-screen--left">
@@ -26,13 +35,17 @@
 import { translate } from '@/common/js/util.js'
 export default {
   created() {
-    this.index = this.defaultIndex
-    this.$router.push(this.comp[this.index].name)
+    // this.index = this.defaultIndex
+    // this.$router.push(this.comp[this.index].name)
   },
   mounted() {
     this.maxMoveDistance = window.innerWidth
     this.minIndex = 0
-    this.maxIndex = this.comp.length - 1
+    this.maxIndex = this.comp.length - 1 
+    if (this.defaultIndex !== -1) {
+      this.index = this.defaultIndex
+      this.$router.push({name: this.comp[this.index].name})
+    }
   },
   props: {
     comp: {
@@ -43,7 +56,7 @@ export default {
     },
     'default-index': {
       type: Number,
-      default: 0
+      default: -1
     }
   },
   data() {
@@ -58,6 +71,12 @@ export default {
     }
   },
   computed: {
+    // comp() {
+    //   return this.data.map(data => {
+    //     const { path } = data
+    //     if (path.includes('/'))
+    //   })
+    // },
     direction() { // 可滑动方向，指的是手指滑动的方向。左滑即页面右边有东西。
       if (this.index === this.minIndex) {
         return 'left'
@@ -145,13 +164,13 @@ export default {
   watch: {
     $route(to, from) {
       const fromIndex = this.comp.findIndex(comp => {
-        return comp.name ? comp.name === from.name : comp.path === from.path
+        return comp.name ? comp.name === from.name : new RegExp(`.*${comp.path}$`).test(from.path)
       })
       const toIndex = this.comp.findIndex(comp => {
-        return comp.name ? comp.name === to.name : comp.path === to.path
+        return comp.name ? comp.name === to.name : new RegExp(`.*${comp.path}$`).test(to.path)
       })
       this.index = toIndex
-      if (this.isDragedSlide) {
+      if (this.isDragedSlide || fromIndex === -1) {
         this.transitionName = ''
         this.isDragedSlide = false
       } else {
@@ -166,6 +185,34 @@ export default {
 .tab-slider {
   position: relative;
   width: 100%;
+  &__tab {
+    display: flex;
+    justify-content: space-around;
+    font-size: 18px;
+    &--item {
+      text-decoration: none;
+      &:visited {
+        color: #2c3e50;
+      }
+      display: inline-block;
+      position: relative;
+      &::after {
+        content: '';
+        display: inline-block;
+        position: absolute;
+        left: 50%;
+        bottom: -2px;
+        width: 0;
+        height: 1px;
+        transition: all .2s linear;
+        background: #fc9153;
+      }
+      &.active::after {
+        left: 0;
+        width: 100%;
+      }
+    }
+  }
   &__content {
     position: absolute;
     height: 100%;
