@@ -158,6 +158,7 @@ export default {
       } else {
         this.transitionName = fromIndex - toIndex > 0 ? 'slide-right' : 'slide-left'
       }
+      this.$emit('success', to.name)
     }
   }
 }
