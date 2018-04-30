@@ -1,6 +1,6 @@
 {
   "name": "tab-slider",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "description": "A Vue component that can switch tabs by swiping the screen to the left or right",
   "author": "miao <yunliangmiao@gmail.com>",
   "private": false,
