@@ -1,14 +1,5 @@
 <template>
   <div class="tab-slider">
-    <div class="tab-slider__tab">
-      <router-link
-        class="tab-slider__tab--item"
-        v-for="item in comp" :key="item.name"
-        :to="{name: item.name, path: item.path}"
-        active-class="active">
-        {{item.label}}
-      </router-link>
-    </div>
     <div
       ref="leftPage"
       class="tab-slider__out-of-screen tab-slider__out-of-screen--left">
@@ -34,10 +25,7 @@
 <script>
 import { translate } from '@/common/js/util.js'
 export default {
-  created() {
-    // this.index = this.defaultIndex
-    // this.$router.push(this.comp[this.index].name)
-  },
+
   mounted() {
     this.maxMoveDistance = window.innerWidth
     this.minIndex = 0
@@ -71,12 +59,6 @@ export default {
     }
   },
   computed: {
-    // comp() {
-    //   return this.data.map(data => {
-    //     const { path } = data
-    //     if (path.includes('/'))
-    //   })
-    // },
     direction() { // 可滑动方向，指的是手指滑动的方向。左滑即页面右边有东西。
       if (this.index === this.minIndex) {
         return 'left'
@@ -185,34 +167,6 @@ export default {
 .tab-slider {
   position: relative;
   width: 100%;
-  &__tab {
-    display: flex;
-    justify-content: space-around;
-    font-size: 18px;
-    &--item {
-      text-decoration: none;
-      &:visited {
-        color: #2c3e50;
-      }
-      display: inline-block;
-      position: relative;
-      &::after {
-        content: '';
-        display: inline-block;
-        position: absolute;
-        left: 50%;
-        bottom: -2px;
-        width: 0;
-        height: 1px;
-        transition: all .2s linear;
-        background: #fc9153;
-      }
-      &.active::after {
-        left: 0;
-        width: 100%;
-      }
-    }
-  }
   &__content {
     position: absolute;
     height: 100%;
