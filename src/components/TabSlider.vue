@@ -168,6 +168,7 @@ export default {
 .tab-slider {
   position: relative;
   width: 100%;
+  overflow-x: hidden;
   &__content {
     position: absolute;
     height: 100%;
